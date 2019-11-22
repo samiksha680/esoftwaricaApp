@@ -1,0 +1,38 @@
+package com.example.esoftwaricaassign3.ui.home;
+
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.esoftwaricaassign3.R;
+import com.example.esoftwaricaassign3.adapters.StudentAdp;
+import com.example.esoftwaricaassign3.ui.dashboard.StudentForm;
+
+public class HomeFragment extends Fragment {
+    RecyclerView userRV;
+
+    private HomeViewModel homeViewModel;
+
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+        homeViewModel =
+                ViewModelProviders.of(this).get(HomeViewModel.class);
+        final View root = inflater.inflate(R.layout.fragment_home, container, false);
+
+        userRV = root.findViewById(R.id.rv);
+
+        StudentAdp homeUserAdapter = new StudentAdp(root.getContext(), StudentForm.userDetails);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        userRV.setLayoutManager(layoutManager);
+        userRV.setAdapter(homeUserAdapter);
+
+        return root;
+    }
+}
